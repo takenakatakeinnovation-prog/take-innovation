@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Take Innovation｜制作実績一覧" />
+  <title>Works｜Take Innovation</title>
+
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="./index.html" aria-label="Take Innovation ホーム">
+        <span class="brand__mark">∞</span>
+        <span class="brand__text">Take Innovation</span>
+      </a>
+
+      <nav class="nav" aria-label="サイトメニュー">
+        <a href="./index.html#services">Services</a>
+        <a href="./index.html#about">About</a>
+        <a class="nav__cta" href="./index.html#contact">Contact</a>
+      </nav>
+
+      <button class="hamburger" type="button" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobileNav" hidden>
+      <a href="./index.html#services">Services</a>
+      <a href="./index.html#about">About</a>
+      <a href="./index.html#contact" class="mobileNav__cta">Contact</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="section">
+      <div class="container">
+        <header class="sectionHead reveal">
+          <h1 class="pageTitle">Works</h1>
+          <p>制作実績（順次追加）</p>
+        </header>
+
+        <div class="grid2">
+          <article class="workCard reveal">
+            <div class="workCard__thumb thumb--badminton" aria-hidden="true"></div>
+            <div class="workCard__body">
+              <h3>宮古バドミントン協会 公式HP</h3>
+              <p>大会情報・結果を整理し、スマホでも見やすい導線に。</p>
+              <div class="tags">
+                <span>Web</span><span>Static</span><span>運用</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="workCard reveal">
+            <div class="workCard__thumb thumb--automation" aria-hidden="true"></div>
+            <div class="workCard__body">
+              <h3>受付・名簿管理の自動化</h3>
+              <p>フォーム送信から自動返信、名簿整形まで一連で自動化。</p>
+              <div class="tags">
+                <span>GAS</span><span>Sheets</span><span>Automation</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="workCard reveal">
+            <div class="workCard__thumb thumb--app" aria-hidden="true"></div>
+            <div class="workCard__body">
+              <h3>地元向けアプリ（開発中）</h3>
+              <p>地域のお知らせ・イベント・店舗情報などをまとめて見られるアプリ。</p>
+              <div class="tags">
+                <span>Flutter</span><span>iOS/Android</span><span>MVP</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="workCard reveal">
+            <div class="workCard__thumb thumb--web" aria-hidden="true"></div>
+            <div class="workCard__body">
+              <h3>コーポレートサイト制作（準備中）</h3>
+              <p>ブランディングを意識した1枚構成＋更新導線。</p>
+              <div class="tags">
+                <span>Web</span><span>LP</span><span>SEO</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="pageFooter reveal">
+          <a class="btn btn--ghost" href="./index.html">トップへ戻る</a>
+          <a class="btn" href="./index.html#contact">相談する</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <p class="muted">© <span id="year"></span> Take Innovation</p>
+        <a class="muted" href="./index.html">Home</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
