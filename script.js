@@ -1,3 +1,16 @@
+// ===== Header scroll behavior =====
+const header = document.getElementById("siteHeader");
+const SCROLL_TRIGGER = 80; // ここを変えると「いつ出るか」調整できる
+
+function onScroll() {
+  const y = window.scrollY || document.documentElement.scrollTop;
+  if (y > SCROLL_TRIGGER) header.classList.add("is-scrolled");
+  else header.classList.remove("is-scrolled");
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+// ===== Mobile drawer =====
 const btn = document.getElementById("menuBtn");
 const drawer = document.getElementById("drawer");
 
@@ -5,12 +18,13 @@ function openDrawer() {
   drawer.classList.add("is-open");
   drawer.setAttribute("aria-hidden", "false");
   btn.setAttribute("aria-expanded", "true");
+  document.body.style.overflow = "hidden"; // SPで背景スクロール防止
 }
-
 function closeDrawer() {
   drawer.classList.remove("is-open");
   drawer.setAttribute("aria-hidden", "true");
   btn.setAttribute("aria-expanded", "false");
+  document.body.style.overflow = "";
 }
 
 btn?.addEventListener("click", () => {
@@ -19,7 +33,6 @@ btn?.addEventListener("click", () => {
 });
 
 drawer?.addEventListener("click", (e) => {
-  // 背景クリックで閉じる（リンク押下は別で処理）
   if (e.target === drawer) closeDrawer();
 });
 
@@ -27,7 +40,6 @@ document.querySelectorAll(".drawer__link").forEach((a) => {
   a.addEventListener("click", () => closeDrawer());
 });
 
-// Escで閉じる
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeDrawer();
 });

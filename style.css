@@ -4,10 +4,8 @@ html,body{margin:0;padding:0}
 img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit}
-
-/* ===== Theme ===== */
 :root{
-  --bg:#ffffff;
+  --bg:#fff;
   --soft:#f6f7f8;
   --text:#111;
   --muted:rgba(17,17,17,.72);
@@ -17,8 +15,11 @@ button{font:inherit}
   --pad:24px;
 
   --headerH:72px;
-}
 
+  /* ヘッダーの「白い文字」 */
+  --onHero: rgba(255,255,255,.92);
+  --onHeroDim: rgba(255,255,255,.78);
+}
 body{
   min-height:100vh;
   overflow-x:hidden;
@@ -27,8 +28,6 @@ body{
   font-family: system-ui, -apple-system, BlinkMacSystemFont,
     "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
 }
-
-/* ===== Layout ===== */
 .container{
   max-width:var(--container);
   margin:0 auto;
@@ -46,18 +45,18 @@ body{
   padding:0 var(--pad);
   z-index:50;
 
-  /* 👇 完全に素 */
-  background: transparent;
-  color:#fff;
-
-  pointer-events:auto;
+  background:transparent; /* グラデなし */
+  color:var(--onHero);
 }
 
+/* ロゴ（通常） */
 .brand{
   display:flex;
   align-items:center;
   gap:10px;
-  letter-spacing:.12em;
+  letter-spacing:.18em;
+  white-space:nowrap;
+  transition: transform .22s ease, opacity .22s ease;
 }
 .brand__mark{
   width:28px;height:28px;
@@ -72,18 +71,48 @@ body{
   opacity:.92;
 }
 
-.menuBtn{
+/* ✅ スクロール後：ロゴを少しだけ小さく */
+.siteHeader.is-scrolled .brand{
+  transform: scale(0.92);
+  transform-origin: left center;
+}
+
+/* Desktop Nav（最初は隠す → スクロールで出す） */
+.nav{
   display:flex;
+  gap:28px;
+  opacity:0;
+  transform: translateY(-6px);
+  pointer-events:none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.nav__link{
+  font-size:12px;
+  letter-spacing:.24em;
+  color:var(--onHeroDim);
+}
+.nav__link:hover{color:var(--onHero)}
+
+/* ✅ スクロールしたらフェードイン */
+.siteHeader.is-scrolled .nav{
+  opacity:1;
+  transform: translateY(0);
+  pointer-events:auto;
+}
+
+/* Mobile Menu（PCでは隠す、SPだけ出す） */
+.menuBtn{
+  display:none;
   align-items:center;
   gap:10px;
   background:transparent;
   border:0;
-  color:#fff;
+  color:var(--onHero);
   cursor:pointer;
 }
 .menuBtn__label{
   font-size:12px;
-  letter-spacing:.18em;
+  letter-spacing:.22em;
   opacity:.9;
 }
 .hamburger{
@@ -101,7 +130,7 @@ body{
 .hamburger::before{top:0}
 .hamburger::after{bottom:0}
 
-/* ===== Drawer ===== */
+/* ===== Drawer (SP only) ===== */
 .drawer{
   position:fixed;
   inset:0;
@@ -143,47 +172,16 @@ body{
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit: contain;
   object-position:center;
+  background:#000;
 }
-
-/* 静かに文字を浮かせるための暗幕 */
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.25);
   pointer-events:none;
-}
-
-.hero__copy{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  z-index:2;
-  padding:0 18px;
-}
-
-.hero__hand{
-  margin:0;
-  color:rgba(255,255,255,.92);
-  font-size:clamp(28px, 4.8vw, 56px);
-  line-height:1.55;
-  letter-spacing:.06em;
-  /* 手書きっぽくするならここを差し替え（Expressで焼き込み済みなら不要） */
-  font-family: "Hiragino Mincho ProN", "Hiragino Kaku Gothic ProN", "Noto Sans JP", serif;
-  font-weight:400;
-}
-
-.hero__sub{
-  margin:16px 0 0;
-  font-size:12px;
-  letter-spacing:.28em;
-  color:rgba(255,255,255,.75);
 }
 
 /* Scroll */
@@ -209,7 +207,6 @@ body{
   font-size:12px;
   letter-spacing:.24em;
 }
-
 @keyframes scrollLine{
   0%{transform:translateY(-6px);opacity:.25}
   50%{transform:translateY(6px);opacity:1}
@@ -217,13 +214,8 @@ body{
 }
 
 /* ===== Sections ===== */
-.section{
-  padding:120px 0;
-  background:var(--bg);
-}
-.section--soft{
-  background:var(--soft);
-}
+.section{padding:120px 0;background:var(--bg)}
+.section--soft{background:var(--soft)}
 .section__title{
   margin:0 0 22px;
   font-size:34px;
@@ -269,7 +261,7 @@ body{
 }
 .work{
   display:grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns:260px 1fr;
   gap:18px;
   border:1px solid var(--line);
   border-radius:14px;
@@ -285,22 +277,10 @@ body{
   background:linear-gradient(135deg, rgba(0,0,0,.12), rgba(0,0,0,.02));
   min-height:160px;
 }
-.work__body{
-  padding:18px 18px 20px;
-}
-.work__title{
-  margin:0 0 8px;
-  font-size:16px;
-}
-.work__text{
-  margin:0;
-  color:var(--muted);
-  line-height:1.85;
-  font-size:14px;
-}
-.work--placeholder{
-  opacity:.82;
-}
+.work__body{padding:18px 18px 20px}
+.work__title{margin:0 0 8px;font-size:16px}
+.work__text{margin:0;color:var(--muted);line-height:1.85;font-size:14px}
+.work--placeholder{opacity:.82}
 
 /* Contact */
 .contactRow{
@@ -340,15 +320,18 @@ body{
   letter-spacing:.08em;
 }
 
+/* iOS fixes */
+video::-webkit-media-controls{display:none !important}
+
 /* ===== Responsive ===== */
-@media (max-width: 980px){
-  :root{ --headerH:66px; }
+/* SPでは nav を消して、MENU（ハンバーガー）を出す */
+@media (max-width: 760px){
+  :root{ --headerH:66px; --pad:18px; }
+  .nav{display:none;}
+  .menuBtn{display:flex;}
+  .section{padding:86px 0}
+  .section__title{font-size:28px}
   .cards{grid-template-columns:1fr}
   .work{grid-template-columns:1fr}
   .work__thumb{min-height:180px}
-}
-@media (max-width: 560px){
-  :root{ --pad:18px; }
-  .section{padding:86px 0}
-  .section__title{font-size:28px}
 }
