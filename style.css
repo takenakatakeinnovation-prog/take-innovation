@@ -1,81 +1,238 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
+/* =========================
+   Base / Reset
+========================= */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* Base */
 html, body {
-  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* ✅ ここを 100vh にしない（下が表示されない原因になる） */
+  min-height: 100vh;
+  overflow-x: hidden;   /* 横だけ隠す（縦はスクロールさせる） */
+
   font-family: system-ui, -apple-system, BlinkMacSystemFont,
-               "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-  background: #000;
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+
+  background: #fff;
   color: #111;
 }
 
-/* HERO */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* Video full cover */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:root {
+  --container: 1040px;
+  --pad: 24px;
+  --text: #111;
+  --muted: rgba(17, 17, 17, 0.72);
+  --line: rgba(17, 17, 17, 0.12);
+  --bg: #fff;
+  --bg-soft: #f6f7f8;
+}
+
+/* =========================
+   HERO (Video)
+========================= */
+.hero {
+  position: relative;
+  height: 100vh;        /* ✅ 100vh は hero だけ */
+  overflow: hidden;     /* ✅ hidden も hero だけ */
+  background: #000;
+}
+
+/* video full cover */
 .hero__video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;      /* 画面いっぱい */
+  object-fit: cover;
   object-position: center;
   background: #000;
 }
 
-/* Scroll hint */
+/* もし動画が重い時の見え方を安定させたいなら薄い暗幕（任意） */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  pointer-events: none;
+}
+
+/* SCROLL 表示（任意） */
 .scroll {
   position: absolute;
-  bottom: 24px;
   left: 50%;
+  bottom: 22px;
   transform: translateX(-50%);
-  text-align: center;
-  color: rgba(255,255,255,0.8);
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  color: rgba(255,255,255,0.85);
   font-size: 12px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
 }
 
 .scroll__line {
-  display: block;
   width: 1px;
   height: 28px;
-  margin: 0 auto 6px;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.85);
 }
 
-/* CONTENT */
-.content {
-  background: #fff;
+/* =========================
+   Layout
+========================= */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--pad);
 }
 
 .section {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 120px 24px;
+  padding: 120px 0;
+  background: var(--bg);
 }
 
-.section h2 {
-  font-size: 32px;
-  margin-bottom: 24px;
+.section--soft {
+  background: var(--bg-soft);
 }
 
-.section p {
+.section__title {
+  font-size: 34px;
+  letter-spacing: 0.02em;
+  margin: 0 0 22px 0;
+}
+
+.section__lead {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.9;
   font-size: 16px;
-  line-height: 1.8;
-  color: #333;
 }
 
-/* iOS対策（勝手に全画面再生されないように） */
+/* ちょい上品に見せたい場合の細線（任意） */
+.section__rule {
+  margin-top: 20px;
+  width: 56px;
+  height: 1px;
+  background: var(--line);
+}
+
+/* =========================
+   Cards / Works
+   （works.html or index内 Works 用）
+========================= */
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.card__img {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card__body {
+  padding: 18px 18px 20px;
+}
+
+.card__title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.card__text {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* =========================
+   Footer (任意)
+========================= */
+.footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+/* =========================
+   iOS Safari small fixes
+========================= */
 video::-webkit-media-controls {
   display: none !important;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 980px) {
+  .section {
+    padding: 92px 0;
+  }
+  .grid--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --pad: 18px;
+  }
+  .section {
+    padding: 76px 0;
+  }
+  .section__title {
+    font-size: 28px;
+  }
+  .grid--3 {
+    grid-template-columns: 1fr;
+  }
+  .scroll {
+    bottom: 16px;
+    font-size: 11px;
+  }
 }
