@@ -45,9 +45,11 @@ body{
   justify-content:space-between;
   padding:0 var(--pad);
   z-index:50;
+
+  /* 👇 完全に素 */
+  background: transparent;
   color:#fff;
-  mix-blend-mode: normal;
-  background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,0));
+
   pointer-events:auto;
 }
 
