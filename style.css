@@ -4,6 +4,8 @@ html,body{margin:0;padding:0}
 img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit}
+
+/* ===== Theme ===== */
 :root{
   --bg:#fff;
   --soft:#f6f7f8;
@@ -16,10 +18,10 @@ button{font:inherit}
 
   --headerH:72px;
 
-  /* ヘッダーの「白い文字」 */
   --onHero: rgba(255,255,255,.92);
   --onHeroDim: rgba(255,255,255,.78);
 }
+
 body{
   min-height:100vh;
   overflow-x:hidden;
@@ -28,6 +30,7 @@ body{
   font-family: system-ui, -apple-system, BlinkMacSystemFont,
     "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
 }
+
 .container{
   max-width:var(--container);
   margin:0 auto;
@@ -49,7 +52,7 @@ body{
   color:var(--onHero);
 }
 
-/* ロゴ（通常） */
+/* Logo */
 .brand{
   display:flex;
   align-items:center;
@@ -71,13 +74,13 @@ body{
   opacity:.92;
 }
 
-/* ✅ スクロール後：ロゴを少しだけ小さく */
+/* ✅ Scroll: logo slightly smaller */
 .siteHeader.is-scrolled .brand{
   transform: scale(0.92);
   transform-origin: left center;
 }
 
-/* Desktop Nav（最初は隠す → スクロールで出す） */
+/* Desktop Nav (hidden -> fade in on scroll) */
 .nav{
   display:flex;
   gap:28px;
@@ -93,14 +96,14 @@ body{
 }
 .nav__link:hover{color:var(--onHero)}
 
-/* ✅ スクロールしたらフェードイン */
+/* ✅ Scroll: nav fade-in */
 .siteHeader.is-scrolled .nav{
   opacity:1;
   transform: translateY(0);
   pointer-events:auto;
 }
 
-/* Mobile Menu（PCでは隠す、SPだけ出す） */
+/* Mobile menu button (SP only) */
 .menuBtn{
   display:none;
   align-items:center;
@@ -130,7 +133,7 @@ body{
 .hamburger::before{top:0}
 .hamburger::after{bottom:0}
 
-/* ===== Drawer (SP only) ===== */
+/* ===== Drawer ===== */
 .drawer{
   position:fixed;
   inset:0;
@@ -167,6 +170,13 @@ body{
   overflow:hidden;
   background:#000;
 }
+
+/* ✅ ここで “薄さ” の原因になりがちな暗幕を無効化（保険） */
+.hero::after{
+  content: none !important;
+}
+
+/* ✅ 切れない優先：contain（黒帯は出る） */
 .hero__video{
   position:absolute;
   inset:0;
@@ -174,6 +184,11 @@ body{
   height:100%;
   object-fit: contain;
   object-position:center;
+
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+
   background:#000;
 }
 
@@ -219,6 +234,20 @@ body{
   color:var(--muted);
   line-height:1.9;
   font-size:16px;
+}
+
+/* About refined text */
+.about__catch{
+  font-size:18px;
+  line-height:1.9;
+  letter-spacing:.04em;
+  margin:0 0 18px;
+}
+.about__text{
+  font-size:15px;
+  line-height:1.9;
+  color:var(--muted);
+  margin:0;
 }
 
 /* Services cards */
@@ -301,29 +330,34 @@ body{
   border-color:var(--line);
 }
 
-/* Footer */
+/* Footer minimal */
 .footer{
   padding:36px 0;
-  background:#fff;
   border-top:1px solid var(--line);
+  background:#fff;
 }
 .footer__inner{
-  color:var(--muted);
   font-size:12px;
   letter-spacing:.08em;
+  color:var(--muted);
 }
 
-/* iOS fixes */
+/* iOS */
 video::-webkit-media-controls{display:none !important}
 
 /* ===== Responsive ===== */
-/* SPでは nav を消して、MENU（ハンバーガー）を出す */
 @media (max-width: 760px){
   :root{ --headerH:66px; --pad:18px; }
+
   .nav{display:none;}
   .menuBtn{display:flex;}
+
   .section{padding:86px 0}
   .section__title{font-size:28px}
+
+  .about__catch{font-size:17px}
+  .about__text{font-size:14.5px}
+
   .cards{grid-template-columns:1fr}
   .work{grid-template-columns:1fr}
   .work__thumb{min-height:180px}

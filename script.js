@@ -1,6 +1,6 @@
 // ===== Header scroll behavior =====
 const header = document.getElementById("siteHeader");
-const SCROLL_TRIGGER = 80; // ここを変えると「いつ出るか」調整できる
+const SCROLL_TRIGGER = 80; // ナビが出るタイミング調整
 
 function onScroll() {
   const y = window.scrollY || document.documentElement.scrollTop;
@@ -18,7 +18,7 @@ function openDrawer() {
   drawer.classList.add("is-open");
   drawer.setAttribute("aria-hidden", "false");
   btn.setAttribute("aria-expanded", "true");
-  document.body.style.overflow = "hidden"; // SPで背景スクロール防止
+  document.body.style.overflow = "hidden"; // 背景スクロール防止
 }
 function closeDrawer() {
   drawer.classList.remove("is-open");
