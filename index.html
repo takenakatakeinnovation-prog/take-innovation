@@ -4,41 +4,138 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Take Innovation</title>
-  <meta name="description" content="Take Innovation｜宮古島を拠点に、アプリ開発・HP制作・業務効率化を行っています。" />
+  <meta name="description" content="宮古島を拠点に、アプリ開発・HP制作・業務効率化を行う Take Innovation" />
+
   <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-  <!-- HERO VIDEO -->
-  <section class="hero">
-    <video
-      class="hero__video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-    >
-      <source src="./video/hero.mp4" type="video/mp4" />
-      <!-- フォールバック（動画非対応時） -->
-    </video>
+  <!-- Header (LIVESENSEっぽい最小ヘッダー) -->
+  <header class="siteHeader">
+    <a class="brand" href="#top" aria-label="Take Innovation">
+      <span class="brand__mark">∞</span>
+      <span class="brand__text">TAKE INNOVATION</span>
+    </a>
 
-    <!-- スクロール誘導（任意） -->
-    <div class="scroll">
-      <span class="scroll__line"></span>
-      <span class="scroll__text">SCROLL</span>
+    <button class="menuBtn" id="menuBtn" aria-label="Menu" aria-expanded="false">
+      <span class="menuBtn__label">MENU</span>
+      <span class="hamburger" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- Drawer -->
+  <nav class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__inner">
+      <a href="#about" class="drawer__link">ABOUT</a>
+      <a href="#services" class="drawer__link">SERVICES</a>
+      <a href="#works" class="drawer__link">WORKS</a>
+      <a href="#contact" class="drawer__link">CONTACT</a>
     </div>
-  </section>
+  </nav>
 
-  <!-- 下層のダミー（確認用） -->
-  <main class="content">
-    <section class="section">
-      <h2>About</h2>
-      <p>
-        Take Innovationは、宮古島を拠点に<br>
-        アプリ開発・HP制作・業務効率化を行っています。
-      </p>
+  <!-- Hero -->
+  <main id="top">
+    <section class="hero">
+      <video class="hero__video" autoplay muted loop playsinline preload="metadata">
+        <source src="./video/hero.mp4" type="video/mp4" />
+      </video>
+
+      <!-- 文字を動画に焼き込み済みなら、このhero__copyは消してOK -->
+      <div class="hero__copy" aria-hidden="true">
+        <p class="hero__hand">
+          いま、この島で<br>
+          必要とされていること。
+        </p>
+        <p class="hero__sub">TAKE INNOVATION / MIYAKOJIMA</p>
+      </div>
+
+      <a class="scrollDown" href="#about" aria-label="Scroll down">
+        <span class="scrollDown__line" aria-hidden="true"></span>
+        <span class="scrollDown__text">SCROLL DOWN</span>
+      </a>
     </section>
+
+    <!-- Section: About -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section__title">About</h2>
+        <p class="section__lead">
+          Take Innovationは、宮古島を拠点に<br>
+          アプリ開発・HP制作・業務効率化を行っています。
+        </p>
+      </div>
+    </section>
+
+    <!-- Section: Services -->
+    <section class="section section--soft" id="services">
+      <div class="container">
+        <h2 class="section__title">Services</h2>
+
+        <div class="cards">
+          <article class="card">
+            <h3 class="card__title">Web / HP制作</h3>
+            <p class="card__text">見やすく、更新しやすく。運用まで含めて設計します。</p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">アプリ開発</h3>
+            <p class="card__text">地域に根ざした使われるアプリを、最短で形にします。</p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">業務効率化</h3>
+            <p class="card__text">Googleフォーム/スプレッドシート/自動化など現場に合わせて改善。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Works -->
+    <section class="section" id="works">
+      <div class="container">
+        <h2 class="section__title">Works</h2>
+
+        <div class="works">
+          <a class="work" href="./works.html">
+            <div class="work__thumb"></div>
+            <div class="work__body">
+              <h3 class="work__title">宮古バドミントン協会 公式HP</h3>
+              <p class="work__text">大会情報・結果掲載を見やすく整理。運営の更新負担を軽く。</p>
+            </div>
+          </a>
+
+          <div class="work work--placeholder">
+            <div class="work__thumb"></div>
+            <div class="work__body">
+              <h3 class="work__title">準備中</h3>
+              <p class="work__text">新しい実績を順次追加予定です。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Contact -->
+    <section class="section section--soft" id="contact">
+      <div class="container">
+        <h2 class="section__title">Contact</h2>
+        <p class="section__lead">
+          まずは「相談だけ」でもOKです。<br>
+          連絡先（メール/SNS）をここに置きます。
+        </p>
+
+        <div class="contactRow">
+          <a class="btn" href="mailto:example@take-innovation.jp">MAIL</a>
+          <a class="btn btn--ghost" href="#">SNS</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <small>© Take Innovation</small>
+      </div>
+    </footer>
   </main>
+
+  <script src="./script.js"></script>
 </body>
 </html>
