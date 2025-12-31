@@ -1,40 +1,33 @@
-// Mobile menu
-const hamburger = document.querySelector(".hamburger");
-const mobileNav = document.querySelector(".mobileNav");
+const btn = document.getElementById("menuBtn");
+const drawer = document.getElementById("drawer");
 
-function toggleMenu(forceOpen = null) {
-  const isOpen = forceOpen !== null ? forceOpen : mobileNav.hasAttribute("hidden");
-  if (isOpen) {
-    mobileNav.removeAttribute("hidden");
-    hamburger.setAttribute("aria-expanded", "true");
-  } else {
-    mobileNav.setAttribute("hidden", "");
-    hamburger.setAttribute("aria-expanded", "false");
-  }
+function openDrawer() {
+  drawer.classList.add("is-open");
+  drawer.setAttribute("aria-hidden", "false");
+  btn.setAttribute("aria-expanded", "true");
 }
 
-if (hamburger && mobileNav) {
-  hamburger.addEventListener("click", () => {
-    const willOpen = mobileNav.hasAttribute("hidden");
-    toggleMenu(willOpen);
-  });
-
-  // Close menu on link click
-  mobileNav.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", () => toggleMenu(false));
-  });
+function closeDrawer() {
+  drawer.classList.remove("is-open");
+  drawer.setAttribute("aria-hidden", "true");
+  btn.setAttribute("aria-expanded", "false");
 }
 
-// Reveal on scroll
-const reveals = document.querySelectorAll(".reveal");
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (e.isIntersecting) e.target.classList.add("is-visible");
-  });
-}, { threshold: 0.12 });
+btn?.addEventListener("click", () => {
+  const isOpen = drawer.classList.contains("is-open");
+  isOpen ? closeDrawer() : openDrawer();
+});
 
-reveals.forEach((el) => io.observe(el));
+drawer?.addEventListener("click", (e) => {
+  // 背景クリックで閉じる（リンク押下は別で処理）
+  if (e.target === drawer) closeDrawer();
+});
 
-// Year
-const y = document.getElementById("year");
-if (y) y.textContent = new Date().getFullYear();
+document.querySelectorAll(".drawer__link").forEach((a) => {
+  a.addEventListener("click", () => closeDrawer());
+});
+
+// Escで閉じる
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeDrawer();
+});
