@@ -488,3 +488,17 @@ video::-webkit-media-controls{display:none !important}
     object-position: center center;
   }
 }
+/* ===== HERO video switch ===== */
+.hero__video--sp{ display:none; }
+.hero__video--pc{ display:block; }
+
+@media (max-width: 768px){
+  .hero__video--pc{ display:none !important; }
+  .hero__video--sp{ display:block !important; }
+
+  /* SP動画が縦ならcover/contain選べる（今は途切れ防止） */
+  .hero__video--sp{
+    object-fit: contain !important;
+    background: #000;
+  }
+}
