@@ -420,7 +420,7 @@ body{
 
   /* スマホは「途切れない」を優先（黒帯出るのは仕様） */
   .hero__video--sp{
-    object-fit: contain !important;
+    object-fit: cover !important;
     background:#000;
   }
 }
