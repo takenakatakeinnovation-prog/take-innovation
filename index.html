@@ -44,10 +44,17 @@
 
   <!-- Hero -->
   <main id="top">
-    <section class="hero">
-      <video class="hero__video" autoplay muted loop playsinline preload="metadata">
-        <source src="./video/hero.mp4" type="video/mp4" />
-      </video>
+      <section class="hero">
+        <!-- PC -->
+        <video class="hero__video hero__video--pc" autoplay muted loop playsinline preload="metadata">
+          <source src="video/hero-pc.mp4" type="video/mp4">
+        </video>
+
+        <!-- SP -->
+        <video class="hero__video hero__video--sp" autoplay muted loop playsinline preload="metadata">
+          <source src="video/hero-sp.mp4" type="video/mp4">
+        </video>
+      </section>
 
       <a class="scrollDown" href="#about" aria-label="Scroll down">
         <span class="scrollDown__line" aria-hidden="true"></span>
@@ -83,7 +90,7 @@
             <p class="card__text">見やすく、更新しやすく。運用まで含めて設計します。</p>
           </article>
           <article class="card">
-            <h3 class="card__title">アプリ開発</h3>
+            <h3 class="card__title">アプリ開発（今後展開予定）</h3>
             <p class="card__text">地域に根ざした「使われる」アプリを、最短で形にします。</p>
           </article>
           <article class="card">
