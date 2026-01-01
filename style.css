@@ -470,18 +470,21 @@ video::-webkit-media-controls{display:none !important}
   object-position:50% 45%;
 }
 
-/* ===== FORCE mobile no-crop ===== */
+/* ===== HERO mobile fix for 3:4 video ===== */
 @media (max-width: 768px){
-  #heroVideo{
-    object-fit: contain !important;
-    object-position: center center !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
 
   .hero{
-    height: 100vh !important;
-    background: #f3f3f3 !important;
-    overflow: hidden !important;
+    height: auto !important;          /* ← 100vh をやめる */
+    aspect-ratio: 3 / 4;              /* ← 動画と同じ比率 */
+    background: #f3f3f3;
+    overflow: hidden;
+  }
+
+  .hero__video{
+    position: relative !important;
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;   /* ← 絶対切れない */
+    object-position: center center;
   }
 }
