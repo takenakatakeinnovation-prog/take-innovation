@@ -74,10 +74,18 @@ body{
   opacity:.92;
 }
 
-/* ✅ Scroll: logo slightly smaller */
-.siteHeader.is-scrolled .brand{
+/* スクロールで小さくするのは文字だけ（∞はズレ防止で固定） */
+.siteHeader.is-scrolled .brand__text{
   transform: scale(0.92);
   transform-origin: left center;
+  display:inline-block;
+}
+
+/* ついでに Safari のズレ対策 */
+.brand__mark{
+  display:grid;
+  place-items:center;
+  transform: translateZ(0);
 }
 
 /* Desktop Nav (hidden -> fade in on scroll) */
