@@ -418,10 +418,20 @@ body{
   .hero__video--pc{ display:none !important; }
   .hero__video--sp{ display:block !important; }
 
-  /* スマホは「途切れない」を優先（黒帯出るのは仕様） */
+/* === FORCE: SP hero should be full-bleed (no black bars) === */
+@media (max-width: 768px){
+  .hero{
+    height: 100vh !important;
+    background: transparent !important; /* 帯の正体がhero背景なら消える */
+  }
+  .hero__video,
   .hero__video--sp{
-      object-fit: cover !important;     /* ← ここをcoverに */
-      object-position: center center;   /* 好みで 50% 45% とか */
-      background: #000;
-    }
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;       /* ← 絶対cover */
+    object-position: 50% 50% !important;
+    background: transparent !important; /* 帯の正体がvideo背景なら消える */
+  }
 }
