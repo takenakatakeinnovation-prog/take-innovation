@@ -470,10 +470,18 @@ video::-webkit-media-controls{display:none !important}
   object-position:50% 45%;
 }
 
-/* ▼ スマホは「途切れない」を優先 */
+/* ===== FORCE mobile no-crop ===== */
 @media (max-width: 768px){
-  .hero__video{
-    object-fit: contain;       /* ← 途切れない */
-    object-position: center;
+  #heroVideo{
+    object-fit: contain !important;
+    object-position: center center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .hero{
+    height: 100vh !important;
+    background: #f3f3f3 !important;
+    overflow: hidden !important;
   }
 }
