@@ -454,11 +454,11 @@ video::-webkit-media-controls{display:none !important}
     aspect-ratio: 16 / 9;
   }
 }
-/* HERO */
 .hero{
   height:100vh;
   position:relative;
   overflow:hidden;
+  background:#f3f3f3; /* 余白が出ても馴染む色 */
 }
 
 .hero__video{
@@ -470,14 +470,10 @@ video::-webkit-media-controls{display:none !important}
   object-position:50% 45%;
 }
 
-/* 初期：PCを表示 */
-.hero__video--sp{ display:none; }
-
-/* SP：スマホでは縦動画を表示 */
+/* ▼ スマホは「途切れない」を優先 */
 @media (max-width: 768px){
-  .hero__video--pc{ display:none; }
-  .hero__video--sp{
-    display:block;
-    object-position:50% 50%; /* 縦は基本センターでOK */
+  .hero__video{
+    object-fit: contain;       /* ← 途切れない */
+    object-position: center;
   }
 }
